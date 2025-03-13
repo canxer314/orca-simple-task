@@ -22,7 +22,7 @@ export async function load(_name: string) {
       label: t("Task tag name"),
       description: t("The name of the tag that is used to identify tasks."),
       type: "string",
-      defaultValue: "Task",
+      defaultValue: "TASK",
     },
     statusName: {
       label: t("Status property name"),
@@ -38,7 +38,7 @@ export async function load(_name: string) {
         "The value of the status property that represents a task that is not started yet.",
       ),
       type: "string",
-      defaultValue: "TODO",
+      defaultValue: "LATER",
     },
     statusDoing: {
       label: t("Doing status value"),
@@ -46,7 +46,7 @@ export async function load(_name: string) {
         "The value of the status property that represents a task that is in progress.",
       ),
       type: "string",
-      defaultValue: "Doing",
+      defaultValue: "NOW",
     },
     statusDone: {
       label: t("Done status value"),
@@ -54,7 +54,7 @@ export async function load(_name: string) {
         "The value of the status property that represents a task that is completed.",
       ),
       type: "string",
-      defaultValue: "Done",
+      defaultValue: "DONE",
     },
     startTimeName: {
       label: t("Start time property name"),
@@ -62,7 +62,7 @@ export async function load(_name: string) {
         "The name of the property that stores the start time of a task.",
       ),
       type: "string",
-      defaultValue: "Start time",
+      defaultValue: "START",
     },
     endTimeName: {
       label: t("End time property name"),
@@ -70,7 +70,19 @@ export async function load(_name: string) {
         "The name of the property that stores the end time of a task.",
       ),
       type: "string",
-      defaultValue: "End time",
+      defaultValue: "END",
+    },
+    scheduledTimeName: {
+      label: t("Scheduled time property name"),
+      description: t("The name of the property that stores the scheduled time of a task."),
+      type: "string",
+      defaultValue: "SCHEDULED",
+    },
+    deadlineTimeName: {
+      label: t("Deadline time property name"),
+      description: t("The name of the property that stores the deadline time of a task."),
+      type: "string",
+      defaultValue: "DEADLINE",
     },
   })
 
