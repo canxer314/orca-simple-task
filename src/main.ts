@@ -332,15 +332,36 @@ function injectStyles() {
     }
 
     .orca-repr-main-content:has(>.orca-tags>.orca-tag[data-name="${taskTagName}"][data-${statusPropName}="${statusTodoValue}"])::before {
-      content: "\\ed27";
+      content: "\\ea6b";
+      color: #858585;
+      width: 1.8125rem;
+      display: inline-block;
+      margin-right: 0;
+      text-align: center;
+      transform: scale(1.5);
+      transform-origin: 1.5rem center;
     }
 
     .orca-repr-main-content:has(>.orca-tags>.orca-tag[data-name="${taskTagName}"][data-${statusPropName}="${statusDoingValue}"])::before {
-      content: "\\fa0d";
+      content: "\\fe56";
+      color: #ebbc00;
+      width: 1.8125rem;
+      display: inline-block;
+      margin-right: 0;
+      text-align: center;
+      transform: scale(1.5);
+      transform-origin: 1.5rem center;
     }
 
     .orca-repr-main-content:has(>.orca-tags>.orca-tag[data-name="${taskTagName}"][data-${statusPropName}="${statusDoneValue}"])::before {
       content: "\\f704";
+      color: #5bb98c;
+      width: 1.8125rem;
+      display: inline-block;
+      margin-right: 0;
+      text-align: center;
+      transform: scale(1.5);
+      transform-origin: 1.5rem center;
     }
 
     .orca-repr-main-content:has(>.orca-tags>.orca-tag[data-name="${taskTagName}"][data-${statusPropName}="${statusDoneValue}"]) .orca-inline {
