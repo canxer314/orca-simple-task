@@ -72,15 +72,19 @@ export async function load(_name: string) {
       type: "string",
       defaultValue: "END",
     },
-    scheduledTimeName: {
+    scheduledTimeName: {  // 新增预约时间字段
       label: t("Scheduled time property name"),
-      description: t("The name of the property that stores the scheduled time of a task."),
+      description: t(
+        "The name of the property that stores the scheduled time of a task.",
+      ),
       type: "string",
       defaultValue: "SCHEDULED",
     },
-    deadlineTimeName: {
+    deadlineTimeName: {  // 新增截止时间字段
       label: t("Deadline time property name"),
-      description: t("The name of the property that stores the deadline time of a task."),
+      description: t(
+        "The name of the property that stores the deadline time of a task.",
+      ),
       type: "string",
       defaultValue: "DEADLINE",
     },
@@ -283,6 +287,22 @@ async function readyTag(isUpdate: boolean = false) {
           typeArgs: { subType: "datetime" },
           pos: taskBlock?.properties?.find(
             (p) => p.name === settings.endTimeName,
+          )?.pos,
+        },
+        {  // 新增预约时间属性
+          name: settings.scheduledTimeName,
+          type: 5,
+          typeArgs: { subType: "datetime" },
+          pos: taskBlock?.properties?.find(
+            (p) => p.name === settings.scheduledTimeName,
+          )?.pos,
+        },
+        {  // 新增截止时间属性
+          name: settings.deadlineTimeName,
+          type: 5,
+          typeArgs: { subType: "datetime" },
+          pos: taskBlock?.properties?.find(
+            (p) => p.name === settings.deadlineTimeName,
           )?.pos,
         },
       ],
