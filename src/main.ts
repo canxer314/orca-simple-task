@@ -430,6 +430,7 @@ function injectStyles() {
     /* 基础样式应用于所有任务日期显示 */
     .orca-repr-main:has(>.orca-repr-main-content>.orca-tags>.orca-tag[data-name="${taskTagName}"])::after {
       opacity: 0.6;
+      font-style: italic;
     }
 
     /* 为查询列表中的任务日期显示添加特定样式 */
