@@ -2,6 +2,7 @@ import { setupL10N, t } from "./libs/l10n"
 import { getMirrorId } from "./libs/utils.ts"
 import type { Block, DbId } from "./orca.d.ts"
 import zhCN from "./translations/zhCN"
+import { format } from "date-fns";
 
 const { subscribe } = window.Valtio
 
@@ -465,17 +466,11 @@ function injectStyles() {
   document.head.appendChild(styleEl)
 
   // 添加日期格式化和动态更新功能
-  updateTaskDates({
-    scheduledTimeName: settings.scheduledTimeName,
-    deadlineTimeName: settings.deadlineTimeName
-  }, taskTagName, statusScheduledTimeName, statusDeadlineTimeName)
+  updateTaskDates(taskTagName, statusScheduledTimeName, statusDeadlineTimeName)
   
   // 设置MutationObserver监听DOM变化，以便在新任务创建时更新日期显示
   const observer = new MutationObserver(() => {
-    updateTaskDates({
-      scheduledTimeName: settings.scheduledTimeName,
-      deadlineTimeName: settings.deadlineTimeName
-    }, taskTagName, statusScheduledTimeName, statusDeadlineTimeName)
+    updateTaskDates(taskTagName, statusScheduledTimeName, statusDeadlineTimeName)
   })
   
   observer.observe(document.body, {
@@ -493,23 +488,16 @@ function injectStyles() {
  * 更新任务日期显示
  */
 function updateTaskDates(
-  settings: {
-    scheduledTimeName: string;
-    deadlineTimeName: string;
-  },
   taskTagName: string,
   statusScheduledTimeName: string,
   statusDeadlineTimeName: string
 ) {
   // 格式化日期为人类可读格式
-  const formatDate = (date: Date): string => {
-    return date.toLocaleString('zh-CN', {
-      year: 'numeric',
-      month: 'numeric',
-      day: 'numeric',
-      hour: '2-digit',
-      minute: '2-digit'
-    }).replaceAll('/', '-')
+  const formatDate = (date: Date): String => {
+    return format(
+      date,
+      "MM/dd/yyyy, EE, hh:mm"
+    )
   }
 
   // 处理只有截止时间的任务 - 修改选择器
@@ -528,7 +516,7 @@ function updateTaskDates(
     const formattedDeadline = formatDate(deadlineDate)
     
     block.setAttribute('data-formatted-deadline', 
-      `${settings.deadlineTimeName}: ${formattedDeadline}`)
+      `Deadl.: ${formattedDeadline}`)
   })
   
   // 处理只有预约时间的任务 - 修改选择器
@@ -547,7 +535,7 @@ function updateTaskDates(
     const formattedScheduled = formatDate(scheduledDate)
     
     block.setAttribute('data-formatted-scheduled', 
-      `${settings.scheduledTimeName}: ${formattedScheduled}`)
+      `Sched.: ${formattedScheduled}`)
   })
   
   // 处理同时有预约时间和截止时间的任务
@@ -572,7 +560,7 @@ function updateTaskDates(
     const formattedDeadline = formatDate(deadlineDate)
     
     block.setAttribute('data-formatted-dates', 
-      `${settings.scheduledTimeName}: ${formattedScheduled}    ${settings.deadlineTimeName}: ${formattedDeadline}`)
+      `Sched.: ${formattedScheduled}      Deadl.: ${formattedDeadline}`)
   })
 }
 
